@@ -1258,7 +1258,7 @@ function SlideMockups() {
           </motion.p>
         </motion.div>
 
-        {/* OS2 Mockup - Console */}
+        {/* OS2 Mockup - PS4 Style Console */}
         <motion.div
           className="flex-1"
           initial={{ opacity: 0, x: 50 }}
@@ -1270,79 +1270,146 @@ function SlideMockups() {
             <p className="text-white/40 text-sm">Console Interface</p>
           </div>
 
-          {/* Console mockup frame */}
-          <div className="relative bg-[#0a0a12] rounded-lg p-3 shadow-2xl border border-[#3a4a8a]/30">
-            {/* Header area with user info */}
-            <div className="flex items-center justify-between mb-3 px-2">
-              <div className="flex items-center gap-2">
-                <div className="w-6 h-6 rounded-full bg-[#3a4a8a] flex items-center justify-center">
-                  <span className="text-white text-[8px]">M</span>
-                </div>
-                <span className="text-white/60 text-xs">Mino User</span>
-              </div>
-              <div className="flex items-center gap-2 text-white/40 text-[8px]">
-                <span>12:00</span>
-                <span>📶</span>
-              </div>
-            </div>
+          {/* PS4-style mockup frame - full bleed dark */}
+          <div className="relative bg-[#000810] rounded-lg overflow-hidden shadow-2xl border border-[#1a2a3a]/50" style={{ aspectRatio: '16/10' }}>
+            {/* Ambient background gradient */}
+            <div className="absolute inset-0 bg-gradient-to-b from-[#0a1525] via-[#000810] to-[#000508]" />
 
-            {/* Content preview area */}
-            <motion.div
-              className="w-full h-32 bg-gradient-to-br from-[#1a1a2a] to-[#0a0a12] rounded-lg mb-3 flex items-center justify-center border border-white/5"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.6 }}
-            >
-              <div className="text-center">
-                <span className="text-4xl mb-2 block">🎮</span>
-                <span className="text-white/60 text-xs">Content Preview</span>
-              </div>
-            </motion.div>
-
-            {/* Horizontal menu tiles */}
-            <div className="flex items-end gap-2 justify-center">
-              {[
-                { kanji: '魚', label: 'Fish', active: true },
-                { kanji: '端', label: 'Apps', active: false },
-                { kanji: '書', label: 'Docs', active: false },
-                { kanji: '映', label: 'Media', active: false },
-                { kanji: '設', label: 'Settings', active: false },
-              ].map((item, i) => (
+            {/* Subtle particle/star effect */}
+            <div className="absolute inset-0 opacity-30">
+              {[...Array(20)].map((_, i) => (
                 <motion.div
-                  key={item.kanji}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 + i * 0.08 }}
-                  className="flex flex-col items-center"
-                >
-                  <div
-                    className={`flex items-center justify-center rounded transition-all ${
-                      item.active
-                        ? 'w-12 h-12 bg-[#3a4a8a] border-2 border-white/50 shadow-lg shadow-[#3a4a8a]/30'
-                        : 'w-9 h-9 bg-white/10'
-                    }`}
-                  >
-                    <span className={`${item.active ? 'text-lg text-white' : 'text-sm text-white/50'}`}>
-                      {item.kanji}
-                    </span>
-                  </div>
-                  <span className={`mt-1 text-[8px] ${item.active ? 'text-white' : 'text-white/30'}`}>
-                    {item.label}
-                  </span>
-                </motion.div>
+                  key={i}
+                  className="absolute w-0.5 h-0.5 bg-white rounded-full"
+                  style={{
+                    left: `${Math.random() * 100}%`,
+                    top: `${Math.random() * 60}%`,
+                  }}
+                  animate={{ opacity: [0.2, 0.6, 0.2] }}
+                  transition={{
+                    duration: 2 + Math.random() * 2,
+                    repeat: Infinity,
+                    delay: Math.random() * 2,
+                  }}
+                />
               ))}
             </div>
 
-            {/* Bottom navigation hints */}
+            {/* Top bar - PS4 style minimal */}
+            <div className="relative flex items-center justify-between px-4 py-2">
+              <div className="flex items-center gap-3">
+                <motion.div
+                  className="w-5 h-5 rounded-full bg-gradient-to-br from-[#0066cc] to-[#004499] flex items-center justify-center"
+                  animate={{ scale: [1, 1.05, 1] }}
+                  transition={{ duration: 3, repeat: Infinity }}
+                >
+                  <span className="text-white text-[7px] font-bold">M</span>
+                </motion.div>
+                <span className="text-white/70 text-[10px]">Mino</span>
+              </div>
+              <div className="flex items-center gap-3 text-white/40 text-[9px]">
+                <span>🔔</span>
+                <span>👤</span>
+                <span>⚙️</span>
+              </div>
+            </div>
+
+            {/* Large content preview - hero area */}
             <motion.div
-              className="flex items-center justify-center gap-4 mt-3 text-white/30 text-[8px]"
+              className="relative mx-4 h-28 rounded overflow-hidden"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.5 }}
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-[#1a3a5a] via-[#2a4a6a] to-[#1a3a5a]" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              <div className="absolute bottom-3 left-4">
+                <p className="text-white font-bold text-sm">Fish Aquarium</p>
+                <p className="text-white/60 text-[9px]">Interactive • Boids Simulation</p>
+              </div>
+              {/* Play button indicator */}
+              <motion.div
+                className="absolute right-4 bottom-3 w-8 h-8 rounded-full bg-white/20 flex items-center justify-center backdrop-blur-sm"
+                animate={{ scale: [1, 1.1, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                <span className="text-white text-xs ml-0.5">▶</span>
+              </motion.div>
+            </motion.div>
+
+            {/* PS4-style horizontal tiles - left aligned, different sizes */}
+            <div className="relative mt-4 px-4">
+              <div className="flex items-end gap-2">
+                {[
+                  { kanji: '魚', label: 'Fish', active: true, color: '#0066cc' },
+                  { kanji: '端', label: 'Apps', active: false, color: '#444' },
+                  { kanji: '書', label: 'Docs', active: false, color: '#444' },
+                  { kanji: '映', label: 'Media', active: false, color: '#444' },
+                  { kanji: '設', label: 'Settings', active: false, color: '#444' },
+                  { kanji: '店', label: 'Store', active: false, color: '#444' },
+                ].map((item, i) => (
+                  <motion.div
+                    key={item.kanji}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.6 + i * 0.06 }}
+                    className="flex flex-col items-center"
+                  >
+                    <motion.div
+                      className={`flex items-center justify-center rounded-sm transition-all relative ${
+                        item.active
+                          ? 'w-14 h-14'
+                          : 'w-10 h-10'
+                      }`}
+                      style={{
+                        backgroundColor: item.active ? item.color : 'rgba(255,255,255,0.08)',
+                        boxShadow: item.active ? '0 4px 20px rgba(0,102,204,0.4)' : 'none',
+                      }}
+                      animate={item.active ? { y: [0, -2, 0] } : {}}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    >
+                      {/* Active indicator line */}
+                      {item.active && (
+                        <motion.div
+                          className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-8 h-0.5 bg-white rounded-full"
+                          initial={{ scaleX: 0 }}
+                          animate={{ scaleX: 1 }}
+                          transition={{ delay: 0.8 }}
+                        />
+                      )}
+                      <span className={`${item.active ? 'text-xl text-white' : 'text-sm text-white/40'}`}>
+                        {item.kanji}
+                      </span>
+                    </motion.div>
+                    <span className={`mt-2 text-[7px] ${item.active ? 'text-white' : 'text-white/30'}`}>
+                      {item.label}
+                    </span>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+            {/* Bottom bar - PS4 controller hints */}
+            <motion.div
+              className="absolute bottom-2 left-0 right-0 flex items-center justify-between px-4 text-white/30"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 1 }}
+              transition={{ delay: 1.2 }}
             >
-              <span>◀ ▶ Navigate</span>
-              <span>✕ Select</span>
-              <span>○ Back</span>
+              <div className="flex items-center gap-3 text-[8px]">
+                <span className="flex items-center gap-1">
+                  <span className="w-3 h-3 rounded-full border border-white/30 flex items-center justify-center text-[6px]">✕</span>
+                  Select
+                </span>
+                <span className="flex items-center gap-1">
+                  <span className="w-3 h-3 rounded-full border border-white/30 flex items-center justify-center text-[6px]">○</span>
+                  Back
+                </span>
+              </div>
+              <div className="flex items-center gap-1 text-[8px]">
+                <span className="opacity-50">OPTIONS</span>
+                <span className="w-4 h-2 rounded-sm border border-white/30" />
+              </div>
             </motion.div>
           </div>
 
@@ -1352,7 +1419,7 @@ function SlideMockups() {
             animate={{ opacity: 1 }}
             transition={{ delay: 1.2 }}
           >
-            Keyboard nav • Kanji icons • Focus states
+            PS4-style navigation • Large tiles • Content-first
           </motion.p>
         </motion.div>
       </div>
