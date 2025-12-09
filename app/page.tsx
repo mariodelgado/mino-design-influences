@@ -265,12 +265,19 @@ function SlideContent({ slideId }: { slideId: SlideId }) {
 
 function SlideTitle() {
   return (
-    <div className="flex flex-col items-center justify-center h-full px-8 relative">
+    <div className="flex flex-col items-center justify-center h-full px-8 relative overflow-hidden">
+      {/* Background pulse */}
+      <motion.div
+        className="absolute inset-0 bg-gradient-radial from-[#1a1a2a] to-transparent opacity-50"
+        animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
+        transition={{ duration: 8, repeat: Infinity }}
+      />
+
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, duration: 0.8 }}
-        className="text-center"
+        className="text-center relative z-10"
       >
         {/* Japanese geometric motif */}
         <div className="flex items-center justify-center gap-6 mb-12">
@@ -291,26 +298,46 @@ function SlideTitle() {
           />
         </div>
 
-        <h1 className="text-7xl md:text-8xl font-bold text-white mb-6">
-          Two Worlds
+        <motion.p
+          className="text-sm text-[#c23a3a] tracking-[0.4em] uppercase mb-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+        >
+          A Design Manifesto
+        </motion.p>
+
+        <h1 className="text-7xl md:text-8xl font-bold text-white mb-4">
+          The Web is Stuck.
         </h1>
-        <p className="text-2xl text-white/50 mb-4">
-          One Design Philosophy
-        </p>
-        <p className="text-lg text-white/30 tracking-[0.3em] uppercase">
-          Ikko Tanaka × PlayStation 4
-        </p>
+        <motion.p
+          className="text-3xl text-white/70 mb-2"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.8 }}
+        >
+          We're building what comes next.
+        </motion.p>
+        <motion.p
+          className="text-lg text-white/40 mt-8 tracking-[0.2em]"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2 }}
+        >
+          Not another template. Not another trend.<br />
+          <span className="text-white/60">A new design language.</span>
+        </motion.p>
       </motion.div>
 
       {/* Side notes */}
-      <SideNote type="info" position="right" delay={1}>
-        The three shapes represent Tanaka's core vocabulary: square (stability), circle (harmony), and the interplay between them.
+      <SideNote type="insight" position="right" delay={1.5}>
+        Every website looks the same. Hero sections, card grids, hamburger menus. We forgot design could be art.
       </SideNote>
-      <SideNote type="insight" position="left" delay={1.3}>
-        Both Tanaka and PS4 emerged from Sony's design ecosystem—Tanaka consulted for Sony in the 1980s.
+      <SideNote type="quote" position="left" delay={1.8}>
+        "The details are not the details. They make the design." — Charles Eames
       </SideNote>
-      <SideNote type="tip" position="bottom-right" delay={1.6}>
-        Use arrow keys or swipe to navigate. Press Space to advance.
+      <SideNote type="tip" position="bottom-right" delay={2.1}>
+        Use arrow keys to navigate
       </SideNote>
     </div>
   );
@@ -318,18 +345,41 @@ function SlideTitle() {
 
 function SlideTwoSolutions() {
   return (
-    <div className="flex h-full relative">
+    <div className="flex h-full relative overflow-hidden">
+      {/* Background pulse effect */}
+      <motion.div
+        className="absolute inset-0 bg-gradient-radial from-white/5 to-transparent"
+        animate={{ scale: [1, 1.5, 1], opacity: [0.1, 0.2, 0.1] }}
+        transition={{ duration: 10, repeat: Infinity }}
+      />
+
+      {/* Top header - provocative statement */}
+      <motion.div
+        className="absolute top-8 left-0 right-0 text-center z-20"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3 }}
+      >
+        <p className="text-[#c23a3a] text-sm tracking-[0.3em] uppercase mb-2">Two Radical Departures</p>
+        <h2 className="text-4xl font-bold text-white">Not Variations. <span className="text-white/50">Revolutions.</span></h2>
+      </motion.div>
+
       {/* Left: OS - Desktop */}
       <motion.div
-        className="w-1/2 h-full flex flex-col items-center justify-center p-12 relative"
+        className="w-1/2 h-full flex flex-col items-center justify-center p-12 pt-32 relative"
         style={{ backgroundColor: '#1a2a3a' }}
         initial={{ x: '-100%' }}
         animate={{ x: 0 }}
         transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
       >
         <div className="text-center">
-          {/* Desktop icon */}
+          {/* Desktop icon with glow */}
           <div className="relative w-32 h-24 mx-auto mb-8">
+            <motion.div
+              className="absolute inset-0 bg-[#2a6a4a]/30 rounded-lg blur-xl"
+              animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
+              transition={{ duration: 3, repeat: Infinity }}
+            />
             <div className="absolute inset-0 bg-[#2a3a4a] rounded-lg border border-white/20">
               <div className="h-4 bg-[#3a4a5a] rounded-t-lg flex items-center px-2 gap-1">
                 <div className="w-2 h-2 rounded-full bg-[#c23a3a]" />
@@ -346,106 +396,126 @@ function SlideTwoSolutions() {
               🐟
             </motion.div>
           </div>
-          <h2 className="text-4xl font-bold text-white mb-4">
+          <h2 className="text-5xl font-bold text-white mb-2">
             OS
           </h2>
-          <p className="text-white/60 text-lg">
-            Desktop Paradigm
+          <p className="text-[#2a6a4a] text-lg font-light tracking-wide">
+            The Living Desktop
           </p>
-          <p className="text-white/40 mt-2">
-            macOS + Mingei + Boids
-          </p>
-          <p className="text-[#2a6a4a] mt-4 text-sm font-mono">
-            /dec-launch/os
+          <p className="text-white/50 mt-4 text-sm max-w-[250px] mx-auto leading-relaxed">
+            Windows that breathe. Fish that swim in formation.
+            <span className="text-white/70"> Desktop as ecosystem.</span>
           </p>
         </div>
 
         {/* Side notes for OS */}
         <motion.div
-          className="absolute bottom-24 left-4 max-w-[180px] p-2 border border-green-500/30 bg-green-500/5 rounded text-xs text-green-300"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
+          className="absolute bottom-20 left-4 max-w-[200px] p-3 border border-[#2a6a4a]/40 bg-[#2a6a4a]/10 rounded-lg text-xs text-[#4a8a6a]"
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.8 }}
         >
-          <span className="opacity-80">Best for: productivity, multi-tasking, creative workflows</span>
+          <span className="font-semibold block mb-1">Why it matters:</span>
+          <span className="opacity-80">Nobody else is making desktops feel alive. This isn't a theme—it's a philosophy.</span>
         </motion.div>
 
         {/* Decorative elements */}
-        <div className="absolute top-12 left-12 w-8 h-8 border-2 border-white/10" />
-        <div className="absolute bottom-12 right-12 w-12 h-12 rounded-full border-2 border-[#2a6a4a]/40" />
+        <motion.div
+          className="absolute top-32 left-8 w-8 h-8 border-2 border-[#2a6a4a]/30"
+          animate={{ rotate: [0, 90, 0] }}
+          transition={{ duration: 8, repeat: Infinity }}
+        />
+        <div className="absolute bottom-12 right-12 w-12 h-12 rounded-full border-2 border-[#2a6a4a]/20" />
       </motion.div>
 
       {/* Right: OS2 - Console */}
       <motion.div
-        className="w-1/2 h-full flex flex-col items-center justify-center p-12 relative"
+        className="w-1/2 h-full flex flex-col items-center justify-center p-12 pt-32 relative"
         style={{ backgroundColor: '#0a0a12' }}
         initial={{ x: '100%' }}
         animate={{ x: 0 }}
         transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
       >
         <div className="text-center">
-          {/* PS4-style tiles */}
-          <div className="flex items-end justify-center gap-2 mb-8">
-            {['魚', '端', '書', '映'].map((kanji, i) => (
-              <motion.div
-                key={kanji}
-                className={`flex items-center justify-center rounded ${
-                  i === 0 ? 'w-14 h-14 bg-[#3a4a8a] border border-white/30' : 'w-10 h-10 bg-white/10'
-                }`}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 + i * 0.1 }}
-              >
-                <span className={`${i === 0 ? 'text-xl text-white' : 'text-sm text-white/50'}`}>
-                  {kanji}
-                </span>
-              </motion.div>
-            ))}
+          {/* PS4-style tiles with glow */}
+          <div className="relative">
+            <motion.div
+              className="absolute inset-0 bg-[#3a4a8a]/20 blur-2xl"
+              animate={{ scale: [1, 1.3, 1], opacity: [0.2, 0.4, 0.2] }}
+              transition={{ duration: 4, repeat: Infinity }}
+            />
+            <div className="flex items-end justify-center gap-2 mb-8 relative">
+              {['魚', '端', '書', '映'].map((kanji, i) => (
+                <motion.div
+                  key={kanji}
+                  className={`flex items-center justify-center rounded ${
+                    i === 0 ? 'w-14 h-14 bg-[#3a4a8a] border border-white/30' : 'w-10 h-10 bg-white/10'
+                  }`}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 + i * 0.1 }}
+                >
+                  <span className={`${i === 0 ? 'text-xl text-white' : 'text-sm text-white/50'}`}>
+                    {kanji}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
           </div>
-          <h2 className="text-4xl font-bold text-white mb-4">
+          <h2 className="text-5xl font-bold text-white mb-2">
             OS2
           </h2>
-          <p className="text-white/60 text-lg">
-            Console Interface
+          <p className="text-[#3a4a8a] text-lg font-light tracking-wide">
+            The Zen Console
           </p>
-          <p className="text-white/40 mt-2">
-            PS4 + Tanaka Aesthetics
-          </p>
-          <p className="text-[#3a4a8a] mt-4 text-sm font-mono">
-            /dec-launch/os2
+          <p className="text-white/50 mt-4 text-sm max-w-[250px] mx-auto leading-relaxed">
+            PlayStation's calm meets Tanaka's geometry.
+            <span className="text-white/70"> Websites as meditation.</span>
           </p>
         </div>
 
         {/* Side notes for OS2 */}
         <motion.div
-          className="absolute bottom-24 right-4 max-w-[180px] p-2 border border-blue-500/30 bg-blue-500/5 rounded text-xs text-blue-300"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
+          className="absolute bottom-20 right-4 max-w-[200px] p-3 border border-[#3a4a8a]/40 bg-[#3a4a8a]/10 rounded-lg text-xs text-[#5a6aaa]"
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 1 }}
         >
-          <span className="opacity-80">Best for: presentations, kiosks, focused single-task modes</span>
+          <span className="font-semibold block mb-1">Why it matters:</span>
+          <span className="opacity-80">Every site fights for attention. This one earns it through stillness.</span>
         </motion.div>
 
         {/* Decorative elements */}
         <motion.div
-          className="absolute top-12 right-12 w-8 h-8 rounded-full bg-[#3a4a8a]/30"
-          animate={{ opacity: [0.3, 0.6, 0.3] }}
+          className="absolute top-32 right-8 w-8 h-8 rounded-full bg-[#3a4a8a]/30"
+          animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.6, 0.3] }}
           transition={{ duration: 3, repeat: Infinity }}
         />
         <div className="absolute bottom-12 left-12 w-12 h-1 bg-white/10" />
       </motion.div>
 
-      {/* Center insight */}
+      {/* Center divider with insight */}
       <motion.div
-        className="absolute top-8 left-1/2 -translate-x-1/2 max-w-[280px] p-3 border border-yellow-500/30 bg-black/80 rounded-lg text-xs text-yellow-300 z-10"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10"
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 1.2 }}
       >
-        <div className="flex items-start gap-2">
-          <Lightbulb className="w-3 h-3 mt-0.5 flex-shrink-0 opacity-60" />
-          <span className="opacity-80">Same design principles, different interaction models. Choose based on your use case.</span>
+        <div className="w-16 h-16 rounded-full bg-black border border-white/20 flex items-center justify-center">
+          <span className="text-2xl text-white/80">間</span>
         </div>
+      </motion.div>
+
+      {/* Bottom provocation */}
+      <motion.div
+        className="absolute bottom-8 left-0 right-0 text-center z-20"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.5 }}
+      >
+        <p className="text-white/40 text-sm">
+          Different paths. Same destination: <span className="text-white/60">making you feel something.</span>
+        </p>
       </motion.div>
     </div>
   );
@@ -824,61 +894,107 @@ function SlidePS4Visual() {
 
 function SlideCommonThread() {
   return (
-    <div className="h-full flex items-center justify-center p-12 bg-gradient-to-br from-[#1a1a18] to-[#0a0a12]">
-      <div className="max-w-4xl text-center">
+    <div className="h-full flex items-center justify-center p-12 bg-[#0a0a0a] relative overflow-hidden">
+      {/* Background pulse */}
+      <motion.div
+        className="absolute inset-0 bg-gradient-radial from-white/[0.03] to-transparent"
+        animate={{ scale: [1, 1.3, 1] }}
+        transition={{ duration: 8, repeat: Infinity }}
+      />
+
+      <div className="max-w-4xl text-center relative z-10">
+        <motion.p
+          className="text-[#c23a3a] text-sm tracking-[0.4em] uppercase mb-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6 }}
+        >
+          The Secret Ingredient
+        </motion.p>
+
         <motion.h2
-          className="text-5xl font-bold text-white mb-8"
+          className="text-5xl md:text-6xl font-bold text-white mb-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
         >
-          The Common Thread
+          What They Understood.<br />
+          <span className="text-white/50">What Everyone Forgot.</span>
         </motion.h2>
 
         <motion.p
-          className="text-3xl text-white/70 mb-16 font-light"
+          className="text-xl text-white/60 mb-12 max-w-2xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.8 }}
         >
-          Both draw from the same Japanese design heritage
+          Tanaka and Sony didn't just make things pretty.<br />
+          They tapped into something ancient. Something universal.
         </motion.p>
 
-        <div className="grid grid-cols-3 gap-8">
+        <div className="grid grid-cols-3 gap-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            className="p-6"
+            className="p-6 border border-white/10 bg-white/[0.02] rounded-lg"
           >
-            <span className="text-5xl mb-4 block">間</span>
-            <h3 className="text-xl font-bold text-white mb-2">Ma (Space)</h3>
-            <p className="text-white/50 text-sm">Negative space as active element</p>
+            <motion.span
+              className="text-6xl mb-4 block"
+              animate={{ scale: [1, 1.05, 1] }}
+              transition={{ duration: 4, repeat: Infinity }}
+            >間</motion.span>
+            <h3 className="text-xl font-bold text-white mb-2">Ma</h3>
+            <p className="text-white/40 text-sm mb-3">The pregnant pause</p>
+            <p className="text-white/60 text-xs leading-relaxed">Space isn't empty. It's full of meaning. The silence between notes makes music.</p>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
-            className="p-6"
+            className="p-6 border border-white/10 bg-white/[0.02] rounded-lg"
           >
-            <span className="text-5xl mb-4 block">侘寂</span>
+            <motion.span
+              className="text-6xl mb-4 block"
+              animate={{ scale: [1, 1.05, 1] }}
+              transition={{ duration: 4, repeat: Infinity, delay: 1 }}
+            >侘寂</motion.span>
             <h3 className="text-xl font-bold text-white mb-2">Wabi-Sabi</h3>
-            <p className="text-white/50 text-sm">Beauty in imperfection and simplicity</p>
+            <p className="text-white/40 text-sm mb-3">Beauty in imperfection</p>
+            <p className="text-white/60 text-xs leading-relaxed">Perfect is boring. Character is interesting. The crack in the bowl is what makes it art.</p>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7 }}
-            className="p-6"
+            className="p-6 border border-white/10 bg-white/[0.02] rounded-lg"
           >
-            <span className="text-5xl mb-4 block">縁</span>
-            <h3 className="text-xl font-bold text-white mb-2">En (Connection)</h3>
-            <p className="text-white/50 text-sm">Meaningful relationships between elements</p>
+            <motion.span
+              className="text-6xl mb-4 block"
+              animate={{ scale: [1, 1.05, 1] }}
+              transition={{ duration: 4, repeat: Infinity, delay: 2 }}
+            >縁</motion.span>
+            <h3 className="text-xl font-bold text-white mb-2">En</h3>
+            <p className="text-white/40 text-sm mb-3">Meaningful connection</p>
+            <p className="text-white/60 text-xs leading-relaxed">Everything is connected. Elements don't exist alone. Relationships are the design.</p>
           </motion.div>
         </div>
+
+        <motion.p
+          className="text-white/30 text-sm mt-10"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2 }}
+        >
+          These aren't trends. They're <span className="text-white/60">timeless principles</span> that modern design forgot.
+        </motion.p>
       </div>
+
+      <SideNote type="insight" position="right" delay={1.5}>
+        Western design optimizes for attention. Japanese design optimizes for feeling.
+      </SideNote>
     </div>
   );
 }
@@ -1078,54 +1194,140 @@ function SlideImprovements() {
 
 function SlideConclusion() {
   return (
-    <div className="h-full flex flex-col items-center justify-center p-12 bg-gradient-to-br from-[#1a1a18] to-[#0a0a12]">
+    <div className="h-full flex flex-col items-center justify-center p-12 bg-[#0a0a0a] relative overflow-hidden">
+      {/* Dramatic background animation */}
       <motion.div
-        className="text-center max-w-3xl"
+        className="absolute inset-0"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 2 }}
+      >
+        <motion.div
+          className="absolute inset-0 bg-gradient-radial from-[#c23a3a]/10 to-transparent"
+          animate={{ scale: [1, 1.5, 1], opacity: [0.1, 0.2, 0.1] }}
+          transition={{ duration: 8, repeat: Infinity }}
+        />
+        <motion.div
+          className="absolute inset-0 bg-gradient-radial from-[#3a4a8a]/10 to-transparent"
+          animate={{ scale: [1.5, 1, 1.5], opacity: [0.1, 0.2, 0.1] }}
+          transition={{ duration: 8, repeat: Infinity, delay: 4 }}
+        />
+      </motion.div>
+
+      <motion.div
+        className="text-center max-w-4xl relative z-10"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        {/* Combined motif */}
-        <div className="flex items-center justify-center gap-8 mb-12">
-          <div className="w-20 h-20 bg-[#c23a3a]" />
-          <div className="w-20 h-20 rounded-full border-2 border-white/50 flex items-center justify-center">
-            <span className="text-3xl">間</span>
-          </div>
-          <div className="w-20 h-20 bg-[#3a4a8a]" />
+        {/* Provocative opening */}
+        <motion.p
+          className="text-[#c23a3a] text-sm tracking-[0.4em] uppercase mb-6"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+        >
+          The Call to Action
+        </motion.p>
+
+        {/* Combined motif - animated */}
+        <div className="flex items-center justify-center gap-6 mb-10">
+          <motion.div
+            className="w-16 h-16 bg-[#c23a3a]"
+            animate={{ rotate: [0, 45, 0] }}
+            transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+          />
+          <motion.div
+            className="w-20 h-20 rounded-full border-2 border-white/60 flex items-center justify-center"
+            animate={{ scale: [1, 1.1, 1] }}
+            transition={{ duration: 4, repeat: Infinity }}
+          >
+            <span className="text-4xl text-white">間</span>
+          </motion.div>
+          <motion.div
+            className="w-16 h-16 bg-[#3a4a8a]"
+            animate={{ rotate: [0, -45, 0] }}
+            transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+          />
         </div>
 
-        <h2 className="text-5xl font-bold text-white mb-6">
-          Design is a Bridge
+        <h2 className="text-6xl md:text-7xl font-bold text-white mb-6">
+          Stop Following.<br />
+          <span className="text-white/50">Start Leading.</span>
         </h2>
 
-        <p className="text-2xl text-white/60 leading-relaxed mb-12">
-          Tanaka bridged tradition and modernity.<br />
-          PlayStation bridged technology and living rooms.<br />
-          <span className="text-white">We bridge both to create something new.</span>
-        </p>
+        <motion.p
+          className="text-2xl text-white/60 leading-relaxed mb-8 max-w-2xl mx-auto"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.6 }}
+        >
+          The web doesn't need another hero section.<br />
+          It doesn't need another card grid.<br />
+          <span className="text-white">It needs designers who remember that screens can be art.</span>
+        </motion.p>
 
-        <div className="flex items-center justify-center gap-4 text-white/30">
-          <span>田中一光</span>
-          <span>×</span>
-          <span>PlayStation</span>
-          <span>×</span>
-          <span>Mino</span>
-        </div>
+        <motion.div
+          className="text-lg text-white/40 mb-12"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1 }}
+        >
+          Tanaka made posters that felt like poetry.<br />
+          PlayStation made interfaces that felt like home.<br />
+          <span className="text-white/70">We're making websites that feel like experiences.</span>
+        </motion.div>
+
+        {/* Final rallying cry */}
+        <motion.div
+          className="border-t border-white/10 pt-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.5 }}
+        >
+          <p className="text-white/30 text-sm tracking-wide mb-4">This is Mino.</p>
+          <div className="flex items-center justify-center gap-6 text-white/50">
+            <span className="text-lg">田中一光</span>
+            <span className="text-[#c23a3a]">×</span>
+            <span className="text-lg">PlayStation</span>
+            <span className="text-[#3a4a8a]">×</span>
+            <span className="text-lg text-white">The Future</span>
+          </div>
+        </motion.div>
       </motion.div>
+
+      {/* Side notes */}
+      <SideNote type="insight" position="bottom-left" delay={2}>
+        This isn't about nostalgia. It's about taking what worked and pushing it forward.
+      </SideNote>
+      <SideNote type="quote" position="bottom-right" delay={2.3}>
+        "In a world full of noise, stillness is revolutionary."
+      </SideNote>
     </div>
   );
 }
 
 function SlideMockups() {
   return (
-    <div className="h-full flex flex-col items-center justify-center p-8 bg-[#0a0a0a]">
-      <motion.h2
-        className="text-4xl font-bold text-white mb-8"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+    <div className="h-full flex flex-col items-center justify-center p-8 bg-[#0a0a0a] relative overflow-hidden">
+      {/* Subtle background */}
+      <motion.div
+        className="absolute inset-0 bg-gradient-radial from-white/[0.02] to-transparent"
+        animate={{ scale: [1, 1.2, 1] }}
+        transition={{ duration: 10, repeat: Infinity }}
+      />
+
+      <motion.div
+        className="text-center mb-6 relative z-10"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
       >
-        Interface Mockups
-      </motion.h2>
+        <p className="text-[#c23a3a] text-xs tracking-[0.4em] uppercase mb-2">See It To Believe It</p>
+        <h2 className="text-4xl font-bold text-white">
+          This Is What Different Looks Like
+        </h2>
+        <p className="text-white/40 text-sm mt-2">Not mockups. Manifestos in pixel form.</p>
+      </motion.div>
 
       <div className="flex gap-8 w-full max-w-6xl">
         {/* OS Mockup - Desktop */}
@@ -1426,29 +1628,26 @@ function SlideMockups() {
 
       {/* Footer */}
       <motion.div
-        className="mt-8 text-center"
+        className="mt-6 text-center relative z-10"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
       >
-        <p className="text-white/30 text-sm">
-          Two interfaces, one philosophy: <span className="text-white/60">間 (Ma)</span>
+        <p className="text-white/50 text-sm mb-2">
+          Two paths. One truth: <span className="text-white">design should make you feel something.</span>
         </p>
-        <div className="flex items-center justify-center gap-6 mt-4">
-          <a
-            href="#"
-            className="text-[#2a6a4a] text-sm hover:text-[#3a8a5a] transition-colors"
-          >
-            /dec-launch/os →
-          </a>
-          <a
-            href="#"
-            className="text-[#3a4a8a] text-sm hover:text-[#4a5a9a] transition-colors"
-          >
-            /dec-launch/os2 →
-          </a>
-        </div>
+        <p className="text-white/30 text-xs">
+          The web has been asleep. <span className="text-[#c23a3a]">We're here to wake it up.</span>
+        </p>
       </motion.div>
+
+      {/* Side notes for context */}
+      <SideNote type="insight" position="bottom-left" delay={1.8}>
+        OS: For those who create. Windows as living spaces, fish as companions.
+      </SideNote>
+      <SideNote type="tip" position="bottom-right" delay={2.1}>
+        OS2: For those who contemplate. Every pixel placed with intention.
+      </SideNote>
     </div>
   );
 }
