@@ -86,6 +86,7 @@ const SLIDES = [
   'ma-concept',
   'comparison',
   'conclusion',
+  'mockups',
 ] as const;
 
 type SlideId = typeof SLIDES[number];
@@ -251,6 +252,8 @@ function SlideContent({ slideId }: { slideId: SlideId }) {
       return <SlideComparison />;
     case 'conclusion':
       return <SlideConclusion />;
+    case 'mockups':
+      return <SlideMockups />;
     default:
       return null;
   }
@@ -1107,6 +1110,276 @@ function SlideConclusion() {
           <span>PlayStation</span>
           <span>×</span>
           <span>Mino</span>
+        </div>
+      </motion.div>
+    </div>
+  );
+}
+
+function SlideMockups() {
+  return (
+    <div className="h-full flex flex-col items-center justify-center p-8 bg-[#0a0a0a]">
+      <motion.h2
+        className="text-4xl font-bold text-white mb-8"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+      >
+        Interface Mockups
+      </motion.h2>
+
+      <div className="flex gap-8 w-full max-w-6xl">
+        {/* OS Mockup - Desktop */}
+        <motion.div
+          className="flex-1"
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.2 }}
+        >
+          <div className="text-center mb-4">
+            <span className="text-[#2a6a4a] font-bold text-xl">OS</span>
+            <p className="text-white/40 text-sm">Desktop Paradigm</p>
+          </div>
+
+          {/* Desktop mockup frame */}
+          <div className="relative bg-gradient-to-br from-[#1a2a3a] to-[#0a1520] rounded-lg p-3 shadow-2xl border border-[#2a6a4a]/30">
+            {/* Menu bar */}
+            <div className="h-5 bg-[#2a3a4a] rounded-t flex items-center px-2 gap-3 mb-2">
+              <span className="text-white/60 text-xs">Mino</span>
+              <span className="text-white/40 text-xs">File</span>
+              <span className="text-white/40 text-xs">Edit</span>
+              <span className="text-white/40 text-xs">View</span>
+            </div>
+
+            {/* Desktop area with windows */}
+            <div className="relative h-56 bg-[#0a1520] rounded overflow-hidden">
+              {/* Animated fish background */}
+              <div className="absolute inset-0">
+                {[1, 2, 3, 4, 5].map((i) => (
+                  <motion.div
+                    key={i}
+                    className="absolute text-[10px]"
+                    style={{ top: `${15 + i * 15}%`, left: `${10 + i * 12}%` }}
+                    animate={{
+                      x: [0, 30 + i * 10, 0],
+                      y: [0, Math.sin(i) * 10, 0]
+                    }}
+                    transition={{
+                      duration: 3 + i * 0.5,
+                      repeat: Infinity,
+                      ease: 'easeInOut'
+                    }}
+                  >
+                    🐟
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Back window (dithered/unfocused) */}
+              <motion.div
+                className="absolute w-28 h-20 bg-[#3a4a5a]/60 rounded shadow-lg backdrop-blur-sm"
+                style={{ top: 15, left: 15, filter: 'blur(1px)' }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 0.7 }}
+                transition={{ delay: 0.5 }}
+              >
+                <div className="h-4 bg-[#4a5a6a]/60 rounded-t flex items-center px-1.5 gap-0.5">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#c23a3a]/60" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#c4a020]/60" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#2a6a4a]/60" />
+                </div>
+                <div className="p-1">
+                  <div className="h-1 bg-white/10 rounded w-3/4 mb-1" />
+                  <div className="h-1 bg-white/10 rounded w-1/2" />
+                </div>
+              </motion.div>
+
+              {/* Front window (focused) */}
+              <motion.div
+                className="absolute w-32 h-24 bg-[#4a5a6a] rounded shadow-xl border border-white/20"
+                style={{ top: 40, left: 70 }}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.7 }}
+              >
+                <div className="h-4 bg-[#5a6a7a] rounded-t flex items-center px-1.5 gap-0.5">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#c23a3a]" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#c4a020]" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#2a6a4a]" />
+                  <span className="text-white/60 text-[6px] ml-1">Notes</span>
+                </div>
+                <div className="p-1.5">
+                  <div className="h-1 bg-white/20 rounded w-full mb-1" />
+                  <div className="h-1 bg-white/20 rounded w-3/4 mb-1" />
+                  <div className="h-1 bg-white/20 rounded w-5/6" />
+                </div>
+              </motion.div>
+
+              {/* Third window */}
+              <motion.div
+                className="absolute w-24 h-16 bg-[#3a4a5a]/70 rounded shadow-lg"
+                style={{ top: 85, left: 140, filter: 'blur(0.5px)' }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 0.8 }}
+                transition={{ delay: 0.6 }}
+              >
+                <div className="h-3 bg-[#4a5a6a]/70 rounded-t flex items-center px-1 gap-0.5">
+                  <div className="w-1 h-1 rounded-full bg-[#c23a3a]/70" />
+                  <div className="w-1 h-1 rounded-full bg-[#c4a020]/70" />
+                  <div className="w-1 h-1 rounded-full bg-[#2a6a4a]/70" />
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Dock */}
+            <motion.div
+              className="flex items-center justify-center gap-1.5 mt-2 h-8 bg-white/10 rounded-lg px-2"
+              initial={{ y: 10, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 1 }}
+            >
+              {['📁', '🌐', '📝', '🎵', '⚙️'].map((icon, i) => (
+                <div
+                  key={i}
+                  className="w-5 h-5 bg-white/20 rounded flex items-center justify-center text-[10px]"
+                >
+                  {icon}
+                </div>
+              ))}
+            </motion.div>
+          </div>
+
+          <motion.p
+            className="text-center text-white/40 text-xs mt-3"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.2 }}
+          >
+            Draggable windows • Boids fish • SVG dithering
+          </motion.p>
+        </motion.div>
+
+        {/* OS2 Mockup - Console */}
+        <motion.div
+          className="flex-1"
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.3 }}
+        >
+          <div className="text-center mb-4">
+            <span className="text-[#3a4a8a] font-bold text-xl">OS2</span>
+            <p className="text-white/40 text-sm">Console Interface</p>
+          </div>
+
+          {/* Console mockup frame */}
+          <div className="relative bg-[#0a0a12] rounded-lg p-3 shadow-2xl border border-[#3a4a8a]/30">
+            {/* Header area with user info */}
+            <div className="flex items-center justify-between mb-3 px-2">
+              <div className="flex items-center gap-2">
+                <div className="w-6 h-6 rounded-full bg-[#3a4a8a] flex items-center justify-center">
+                  <span className="text-white text-[8px]">M</span>
+                </div>
+                <span className="text-white/60 text-xs">Mino User</span>
+              </div>
+              <div className="flex items-center gap-2 text-white/40 text-[8px]">
+                <span>12:00</span>
+                <span>📶</span>
+              </div>
+            </div>
+
+            {/* Content preview area */}
+            <motion.div
+              className="w-full h-32 bg-gradient-to-br from-[#1a1a2a] to-[#0a0a12] rounded-lg mb-3 flex items-center justify-center border border-white/5"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+            >
+              <div className="text-center">
+                <span className="text-4xl mb-2 block">🎮</span>
+                <span className="text-white/60 text-xs">Content Preview</span>
+              </div>
+            </motion.div>
+
+            {/* Horizontal menu tiles */}
+            <div className="flex items-end gap-2 justify-center">
+              {[
+                { kanji: '魚', label: 'Fish', active: true },
+                { kanji: '端', label: 'Apps', active: false },
+                { kanji: '書', label: 'Docs', active: false },
+                { kanji: '映', label: 'Media', active: false },
+                { kanji: '設', label: 'Settings', active: false },
+              ].map((item, i) => (
+                <motion.div
+                  key={item.kanji}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 + i * 0.08 }}
+                  className="flex flex-col items-center"
+                >
+                  <div
+                    className={`flex items-center justify-center rounded transition-all ${
+                      item.active
+                        ? 'w-12 h-12 bg-[#3a4a8a] border-2 border-white/50 shadow-lg shadow-[#3a4a8a]/30'
+                        : 'w-9 h-9 bg-white/10'
+                    }`}
+                  >
+                    <span className={`${item.active ? 'text-lg text-white' : 'text-sm text-white/50'}`}>
+                      {item.kanji}
+                    </span>
+                  </div>
+                  <span className={`mt-1 text-[8px] ${item.active ? 'text-white' : 'text-white/30'}`}>
+                    {item.label}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Bottom navigation hints */}
+            <motion.div
+              className="flex items-center justify-center gap-4 mt-3 text-white/30 text-[8px]"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1 }}
+            >
+              <span>◀ ▶ Navigate</span>
+              <span>✕ Select</span>
+              <span>○ Back</span>
+            </motion.div>
+          </div>
+
+          <motion.p
+            className="text-center text-white/40 text-xs mt-3"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.2 }}
+          >
+            Keyboard nav • Kanji icons • Focus states
+          </motion.p>
+        </motion.div>
+      </div>
+
+      {/* Footer */}
+      <motion.div
+        className="mt-8 text-center"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5 }}
+      >
+        <p className="text-white/30 text-sm">
+          Two interfaces, one philosophy: <span className="text-white/60">間 (Ma)</span>
+        </p>
+        <div className="flex items-center justify-center gap-6 mt-4">
+          <a
+            href="#"
+            className="text-[#2a6a4a] text-sm hover:text-[#3a8a5a] transition-colors"
+          >
+            /dec-launch/os →
+          </a>
+          <a
+            href="#"
+            className="text-[#3a4a8a] text-sm hover:text-[#4a5a9a] transition-colors"
+          >
+            /dec-launch/os2 →
+          </a>
         </div>
       </motion.div>
     </div>
